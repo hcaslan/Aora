@@ -100,3 +100,29 @@ export async function getAccount() {
       return null;
     }
   }
+
+interface Post {
+  $id: string;
+  title: string;
+  thumbnail: string;
+  prompt: string;
+  video: string;
+  creator: {
+    username: string;
+    profileImage: string;
+  };
+}
+  
+  // Get all video Posts
+export async function getAllPosts() {
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.videoCollectionId
+    );
+
+    return posts.documents;
+  } catch (error : any) {
+    throw new Error(error);
+  }
+}
